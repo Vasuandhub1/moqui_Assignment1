@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
 
-<service verb="create" noun="Party">
-
+<!-- create service for party -->
+<service verb="create" noun="Party" type="entity-auto">
+<in-parameters>
+<auto-parameters include="all" entity-name="moqui.party.Party"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</out-parameters>
 </service>
+
+<!-- read service for party -->
+<service verb="get" noun="Party" type="entity-auto">
+<in-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<auto-parameters include="all"></auto-parameters>
+</out-parameters>
+</service>
+
 </services>

@@ -1,0 +1,68 @@
+[
+    {
+        "_dataType": "demo"
+    },
+    {
+        "_entity": "Party",
+        "partyId": "P001",
+        "partyTypeId": "Person"
+    },
+    {
+        "_entity": "Party",
+        "partyId": "P002",
+        "partyTypeId": "Organization"
+    },
+    {
+        "_entity": "Person",
+        "partyId": "P001",
+        "firstName": "John",
+        "lastName": "Doe",
+        "birthDate": "1985-12-15"
+    },
+    {
+        "_entity": "Organization",
+        "partyId": "P002",
+        "organizationName": "TechCorp"
+    },
+    {
+        "_entity": "partyId",
+        "partyId": "P001",
+        "roleTypeId": "Contractor"
+    },
+    {
+        "_entity": "partyId",
+        "partyId": "P001",
+        "roleTypeId": "Agent"
+    },
+    {
+        "_entity": "ContectMech",
+        "contactMechId": "C0001",
+        "contactMechTypeEnumId": "POSTAL_ADDRESS"
+    },
+    {
+        "_entity": "ContectMech",
+        "contactMechId":"C0002",
+        "contactMechTypeEnumId":"EMAIL_ADDRESS"
+    },
+    {
+        "_entity": "PostalAddress",
+        "contactMechId":"C0002",
+        "postaladdressId":"PA222",
+        "toName":"Gaurav",
+        "attnName":"kadaskar",
+        "address1":"indore",
+        "address2":"indore",
+        "city":"indore",
+        "postalCode":"123132"
+    },
+    {
+        "_entity": "TelecomNumber",
+        "contactMechId":"C0001",
+        "telecomnumberId":"TC12123",
+        "countryCode":1213,
+        "areaCode":123,
+        "contactNumber":123132123
+
+    }
+   
+]

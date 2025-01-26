@@ -1,143 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
+  xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
 
-        
 
-      
+  <!-- entity for party -->
 
-        <!-- entity for party -->
+  <entity entity-name="Party" package="moqui.party">
+    <field name="partyId" type="id" is-pk="true"></field>
+    <field name="partyTypeId" type="id" ></field>
+    <relationship type="one-nofk" related="moqui.party.Person"></relationship>
+    <relationship type="one-nofk" related="moqui.party.Organization"></relationship>
+    
 
-        <entity entity-name="Party" package="moqui.party">
-        <field name="partyId" type="id" is-pk="true"></field>
-        <field name="partyTypeId" type="id" not-null="true"></field>
-        <relationship type="one-nofk" related="moqui.party.Person" ></relationship>
-        <relationship type="one-nofk" related="moqui.party.Organization"></relationship>
-      <relationship type="one" related="moqui.party.PartyContactMech">
-      </relationship>
-      <relationship type="many" related="moqui.party.PartyRole">
-      <key-map field-name="partyId" />
-      </relationship>
-
-      <relationship type="one" related="moqui.basic.Enumeration">
+    <relationship type="one" related="moqui.basic.Enumeration">
       <key-map field-name="partyTypeId" />
-      </relationship>
+    </relationship>
 
-      <seed-data>
-    <moqui.basic.EnumerationType description="Party Type" enumTypeId="PartyType"/>
-            <moqui.basic.Enumeration description="Person" enumId="PtyPerson" enumTypeId="PartyType"/>
-            <moqui.basic.Enumeration description="Organization" enumId="PtyOrganization" enumTypeId="PartyType"/>
-      </seed-data>
-        </entity>
-
-      
-        <!-- Person entity for party -->
-
-        <entity entity-name="Person" package="moqui.party">
-        <field name="partyId" type="id" is-pk="true" not-null="true"></field>
-        <field name="firstName" type="text-medium" not-null="true" ></field>
-        <field name="lastName" type="text-medium"></field>
-        <field name="birthDate" type="date" not-null="true"></field>
-        <relationship type="one" related="moqui.party.Party">
-        <key-map field-name="partyId" related="partyId"/>
-        </relationship>
-        </entity>
-
-        <!-- organization entity for party  -->
-
-        <entity entity-name="Organization" package="moqui.party">
-        <field name="partyId" type="id" is-pk="true"></field>
-        <field name="organizationName" type="text-medium"  not-null="true"></field>
-        <relationship type="one" related="Party">
-        <key-map field-name="partyId" related="partyId"/>
-        </relationship>
-        </entity>
-
-         
-
-        <!-- party_Role entity for party -->
-
-        <entity entity-name="PartyRole" package="moqui.party">
-        <field name="partyId" type="id" is-pk="true"></field>
-        <field name="roleTypeId" type="id" is-pk="true"></field>
-        <relationship type="many" related="moqui.party.Party">
-        <key-map field-name="partyId" related="partyId" />
-        </relationship>
-        <relationship type="one" related="moqui.basic.Enumeration">
-        <key-map field-name="roleTypeId" />
-        </relationship>
-        <relationship type="one" related="moqui.basic.Enumeration">
-        <key-map field-name="roleTypeId" />
-        </relationship>
-        <seed-data>
-        <moqui.basic.EnumerationType description="Role Type" enumTypeId="RoleType"/>
-        <moqui.basic.Enumeration description="contractor" enumId="roleContractor" enumTypeId="RoleType"/>
-        <moqui.basic.Enumeration description="supplier" enumId="roleSupplier" enumTypeId="RoleType"/>
-        <moqui.basic.Enumeration description="Agent" enumId="roleAegnt" enumTypeId="RoleType"/>
-        <moqui.basic.Enumeration description="Distributor" enumId="roleDistributor" enumTypeId="RoleType"/>
-        </seed-data>
-        </entity>
+    <seed-data>
+      <moqui.basic.EnumerationType description="Party Type" enumTypeId="PartyType" />
+      <moqui.basic.Enumeration description="Person" enumId="Person" enumTypeId="PartyType" />
+      <moqui.basic.Enumeration description="Organization" enumId="Organization" enumTypeId="PartyType" />
+    </seed-data>
+  </entity>
 
 
-        <!-- partycontactMech entity -->
+  <!-- Person entity for party -->
 
-          <entity entity-name="PartyContactMech" package="moqui.party">
-          <field name="partyId" type="id" is-pk="true"></field>
-          <field name="contactMechId" type="id"></field>
-          <field name="contactMechPurposeId" type="text-medium"></field>
-          <field name="fromDate" type="date"></field>
-          <relationship type="one" related="moqui.party.Party">
-          <key-map field-name="partyId" related="partyId"/>
-          </relationship>
-          <relationship type="one" related="moqui.party.ContactMech">
-          <key-map field-name="contactMechId" related="contactMechId"/>
-          </relationship>
-           <relationship type="one" related="moqui.basic.Enumeration">
-        <key-map field-name="contactMechPurposeId" />
-        </relationship>
-        <seed-data>
-        <moqui.basic.EnumerationType description="Purpose Type" enumTypeId="PurposeType"/>
-         <moqui.basic.Enumeration description="Work" enumId="PartyWork" enumTypeId="PurposeType"/>
-            <moqui.basic.Enumeration description="Home" enumId="PartyHome" enumTypeId="PurposeType"/>
-            <moqui.basic.Enumeration description="Office" enumId="PartyOffice" enumTypeId="PurposeType"/> 
-        </seed-data>
-          </entity>
+  <entity entity-name="Person" package="moqui.party">
+    <field name="partyId" type="id" is-pk="true" not-null="true"></field>
+    <field name="firstName" type="text-medium" not-null="true"></field>
+    <field name="lastName" type="text-medium"></field>
+    <field name="birthDate" type="date" not-null="true"></field>
+    <relationship type="one" related="moqui.party.Party">
+      <key-map field-name="partyId" related="partyId" />
+    </relationship>
+  </entity>
 
-           <!-- contact_mech entity -->
+  <!-- organization entity for party  -->
 
-        <entity entity-name="ContactMech" package="moqui.party">
-        <field name="contactMechId" type="id" is-pk="true"></field>
-        <relationship type="one" related="moqui.party.TelecomNumber"></relationship>
-        <relationship type="one" related="moqui.party.PostalAddress"></relationship>
-        </entity>
+  <entity entity-name="Organization" package="moqui.party">
+    <field name="partyId" type="id" is-pk="true"></field>
+    <field name="organizationName" type="text-medium" not-null="true"></field>
+    <relationship type="one" related="Party">
+      <key-map field-name="partyId" related="partyId" />
+    </relationship>
+  </entity>
 
 
-        <!-- telecomnumbertable  -->
+  <!-- party_Role entity for party -->
 
-        <entity entity-name="TelecomNumber" package="moqui.party">
-        <field name="contactMechId" type="id" is-pk="true"></field>
-        <field name="countrycode" type="id"></field>
-        <field name="areacode" type="number-integer"></field>
-        <field name="contactNumber" type="number-integer"></field>
-        <relationship type="one" related="ContactMech">
-        <key-map field-name="contactMechId" related="contactMechId" />
-        </relationship>
-        </entity>
+  <entity entity-name="PartyRole" package="moqui.party">
+    <field name="partyId" type="id" is-pk="true"></field>
+    <field name="roleTypeId" type="id" is-pk="true"></field>
+    <relationship type="many" related="moqui.party.Party">
+      <key-map field-name="partyId" related="partyId" />
+    </relationship>
+    <relationship type="one" related="moqui.basic.Enumeration">
+      <key-map field-name="roleTypeId" />
+    </relationship>
+    <relationship type="one" related="moqui.basic.Enumeration">
+      <key-map field-name="roleTypeId" />
+    </relationship>
+    <seed-data>
+      <moqui.basic.EnumerationType description="Role Type" enumTypeId="RoleType" />
+      <moqui.basic.Enumeration description="contractor" enumId="roleContractor"
+        enumTypeId="RoleType" />
+      <moqui.basic.Enumeration description="supplier" enumId="Supplier" enumTypeId="RoleType" />
+      <moqui.basic.Enumeration description="Agent" enumId="Agent" enumTypeId="RoleType" />
+      <moqui.basic.Enumeration description="Distributor" enumId="Distributor" enumTypeId="RoleType" />
+      <moqui.basic.Enumeration description="Contractor" enumId="Contractor" enumTypeId="RoleType" />
+    </seed-data>
+  </entity>
 
 
-        <!-- Portal Address -->
+  <!-- partycontactMech entity -->
 
-        <entity entity-name="PostalAddress" package="moqui.party">
-        <field name="contactMechId" type="id" is-pk="true"></field>
-        <field name="toName" type="text-medium"></field>
-        <field name="address1" type="text-long"></field>
-        <field name="address2" type="text-long"></field>
-        <field name="city" type="text-medium"></field>
-        <field name="postalCode" type="id"></field>
-        <relationship type="one" related="moqui.party.ContactMech">
-        <key-map field-name="contactMechId" related="contactMechId" />
-        </relationship>
-        </entity>
-  
+  <entity entity-name="PartyContactMech" package="moqui.party">
+    <field name="partyId" type="id" is-pk="true"></field>
+    <field name="contactMechId" type="id"></field>
+    <field name="contactMechPurposeId" type="text-medium"></field>
+    <field name="fromDate" type="date"></field>
+    <relationship type="one" related="moqui.party.Party">
+      <key-map field-name="partyId" related="partyId" />
+    </relationship>
+    <relationship type="one" related="moqui.party.ContactMech">
+      <key-map field-name="contactMechId" related="contactMechId" />
+    </relationship>
+    <relationship type="one" related="moqui.basic.Enumeration">
+      <key-map field-name="contactMechPurposeId" />
+    </relationship>
+    <seed-data>
+      <moqui.basic.EnumerationType description="Purpose Type" enumTypeId="PurposeType" />
+      <moqui.basic.Enumeration description="Work" enumId="Work" enumTypeId="PurposeType" />
+      <moqui.basic.Enumeration description="Home" enumId="Home" enumTypeId="PurposeType" />
+      <moqui.basic.Enumeration description="Office" enumId="Office" enumTypeId="PurposeType" />
+    </seed-data>
+  </entity>
+
+  <!-- contact_mech entity -->
+
+  <entity entity-name="ContactMech" package="moqui.party">
+    <field name="contactMechId" type="id" is-pk="true"></field>
+    <field name="contactMechEnumId" type="id"></field>
+    <relationship type="one" related="moqui.basic.Enumeration">
+    <key-map field-name="contactMechEnumId" />
+    </relationship>
+    <seed-data>
+     <moqui.basic.EnumerationType description="Contact Mech Type" enumTypeId="contactType" />
+      <moqui.basic.Enumeration description="EMAIL_ADDRESS" enumId="EMAIL_ADDRESS" enumTypeId="contactType" />
+      <moqui.basic.Enumeration description="POSTAL_ADDRESS" enumId="POSTAL_ADDRESS" enumTypeId="contactType" />
+      <moqui.basic.Enumeration description="TELECOM_ADDRESS" enumId="POSTAL_ADDRESS" enumTypeId="contactType" />
+
+    </seed-data>
+  </entity>
+
+
+  <!-- telecomnumbertable  -->
+
+  <entity entity-name="TelecomNumber" package="moqui.party">
+    <field name="contactMechId" type="id" is-pk="true"></field>
+    <field name="countrycode" type="id"></field>
+    <field name="areacode" type="number-integer"></field>
+    <field name="contactNumber" type="number-integer"></field>
+    <relationship type="one" related="ContactMech">
+      <key-map field-name="contactMechId" related="contactMechId" />
+    </relationship>
+  </entity>
+
+
+  <!-- Portal Address -->
+
+  <entity entity-name="PostalAddress" package="moqui.party">
+    <field name="contactMechId" type="id" is-pk="true"></field>
+    <field name="toName" type="text-medium"></field>
+    <field name="address1" type="text-long"></field>
+    <field name="address2" type="text-long"></field>
+    <field name="city" type="text-medium"></field>
+    <field name="postalCode" type="id"></field>
+    <relationship type="one" related="moqui.party.ContactMech">
+      <key-map field-name="contactMechId" related="contactMechId" />
+    </relationship>
+  </entity>
+
 
 </entities>
