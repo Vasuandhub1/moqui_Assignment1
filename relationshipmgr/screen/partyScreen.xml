@@ -8,6 +8,19 @@
         <default-response url="."/>
         </transition> 
 
+        <!-- transition for updateparty -->
+
+        <transition name="updateparty">
+        <service-call name="partyService.store#Party"></service-call>
+        <default-response url="."></default-response>
+        </transition>
+
+        <!-- transition to delete the party -->
+        <transition name="deleteparty">
+        <service-call name="partyService.delete#Party"></service-call>
+        <default-response url="."></default-response>
+        </transition>
+
         <transition name="createContactMech">
         <service-call name="partyService.create#ContactMech"></service-call>
        
@@ -15,6 +28,7 @@
         </transition>
 
  <!-- wigets -->
+
     <widgets>
         <label type="h1" text="Hello world!"/>
 
@@ -27,15 +41,45 @@
        </form-single>
        </container-dialog>
 
+
+        <!-- screen for the update party -->
+
+       <container-dialog id="updateParty" button-text="Update Party">
+       <form-single name="UpdateParty" transition="updateparty">
+       <auto-fields-entity entity-name="moqui.party.Party" field-type="edit" >
+       </auto-fields-entity>
+       <field name="submitbutton">
+       <default-field title="Update"><submit/></default-field>
+       </field>
+       </form-single>
+       </container-dialog>
+
+       <!-- screen for the delete the party  -->
+
+       <container-dialog id="deleteParty" button-text="Delete Party">
+       <form-single name="Deleteparty" transition="deleteparty">
+       <auto-fields-entity entity-name="moqui.party.Party" field-type="edit"/>
+       <field name="submitbutton">
+       <default-field title="delete">
+       <submit/>
+       </default-field>
+       </field>
+
+       </form-single>
+       </container-dialog>
+
+       <!-- screen for the contact mech -->
+
        <container-dialog id="CreateContactMech" button-text="create contact Mech">
        <form-single name="CreateContactMech" transition="createContactMech">
-       
        <auto-fields-entity entity-name="moqui.party.ContactMech" field-type="edit"></auto-fields-entity>
        <field name="submitBUtton">
         <default-field title="Create"><submit/></default-field>
        </field>
        </form-single>
        </container-dialog>
+
+      
        
        
       

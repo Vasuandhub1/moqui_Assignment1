@@ -12,13 +12,35 @@
 </service>
 
 <!-- read service for party -->
-<service verb="get" noun="Party" type="entity-auto">
+<service verb="get" noun="Party" type="inline">
 <in-parameters>
-<auto-parameters include="pk"></auto-parameters>
+<auto-parameters include="pk" entity-name="moqui.party.Party"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<parameter name="value"></parameter>
+</out-parameters>
+<actions>
+<entity-find-one entity-name="moqui.party.Party" value-field="value"></entity-find-one>
+</actions>
+</service>
+
+<!-- update service for the party -->
+
+<service verb="store" noun="Party" type="entity-auto">
+<in-parameters>
+<auto-parameters include="all" entity-name="moqui.party.Party"></auto-parameters>
 </in-parameters>
 <out-parameters>
 <auto-parameters include="all"></auto-parameters>
 </out-parameters>
+</service>
+
+<!-- delete service for the party -->
+
+<service verb="delete" noun="Party" type="entity-auto">
+<in-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</in-parameters>
 </service>
 
 </services>

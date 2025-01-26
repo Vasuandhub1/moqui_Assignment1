@@ -8,11 +8,10 @@
   <entity entity-name="Party" package="moqui.party">
     <field name="partyId" type="id" is-pk="true"></field>
     <field name="partyTypeId" type="id" ></field>
-    <relationship type="one-nofk" related="moqui.party.Person"></relationship>
-    <relationship type="one-nofk" related="moqui.party.Organization"></relationship>
-    
 
-    <relationship type="one" related="moqui.basic.Enumeration">
+    <relationship type="one-nofk" related="moqui.party.Person" short-alias="person"></relationship>
+    <relationship type="one-nofk" related="moqui.party.Organization" short-alias="organization"></relationship>
+    <relationship type="one" related="moqui.basic.Enumeration" short-alias="partyType">
       <key-map field-name="partyTypeId" />
     </relationship>
 
@@ -21,6 +20,12 @@
       <moqui.basic.Enumeration description="Person" enumId="Person" enumTypeId="PartyType" />
       <moqui.basic.Enumeration description="Organization" enumId="Organization" enumTypeId="PartyType" />
     </seed-data>
+
+    <master>
+    <detail relationship="partyType" use-master="default"></detail>
+    <detail relationship="person"></detail>
+    <detail relationship="organization"></detail>
+    </master>
   </entity>
 
 
@@ -52,23 +57,22 @@
   <entity entity-name="PartyRole" package="moqui.party">
     <field name="partyId" type="id" is-pk="true"></field>
     <field name="roleTypeId" type="id" is-pk="true"></field>
+
     <relationship type="many" related="moqui.party.Party">
       <key-map field-name="partyId" related="partyId" />
     </relationship>
     <relationship type="one" related="moqui.basic.Enumeration">
       <key-map field-name="roleTypeId" />
     </relationship>
-    <relationship type="one" related="moqui.basic.Enumeration">
-      <key-map field-name="roleTypeId" />
-    </relationship>
+  
     <seed-data>
       <moqui.basic.EnumerationType description="Role Type" enumTypeId="RoleType" />
       <moqui.basic.Enumeration description="contractor" enumId="roleContractor"
         enumTypeId="RoleType" />
       <moqui.basic.Enumeration description="supplier" enumId="Supplier" enumTypeId="RoleType" />
       <moqui.basic.Enumeration description="Agent" enumId="Agent" enumTypeId="RoleType" />
-      <moqui.basic.Enumeration description="Distributor" enumId="Distributor" enumTypeId="RoleType" />
-      <moqui.basic.Enumeration description="Contractor" enumId="Contractor" enumTypeId="RoleType" />
+      <moqui.basic.Enumeration description="Distributor" enumId="Distributor"
+        enumTypeId="RoleType" />
     </seed-data>
   </entity>
 
@@ -80,7 +84,8 @@
     <field name="contactMechId" type="id"></field>
     <field name="contactMechPurposeId" type="text-medium"></field>
     <field name="fromDate" type="date"></field>
-    <relationship type="one" related="moqui.party.Party">
+
+    <relationship type="one" related="moqui.party.Party"  >
       <key-map field-name="partyId" related="partyId" />
     </relationship>
     <relationship type="one" related="moqui.party.ContactMech">
@@ -89,12 +94,14 @@
     <relationship type="one" related="moqui.basic.Enumeration">
       <key-map field-name="contactMechPurposeId" />
     </relationship>
+
     <seed-data>
       <moqui.basic.EnumerationType description="Purpose Type" enumTypeId="PurposeType" />
       <moqui.basic.Enumeration description="Work" enumId="Work" enumTypeId="PurposeType" />
       <moqui.basic.Enumeration description="Home" enumId="Home" enumTypeId="PurposeType" />
       <moqui.basic.Enumeration description="Office" enumId="Office" enumTypeId="PurposeType" />
     </seed-data>
+   
   </entity>
 
   <!-- contact_mech entity -->
@@ -102,16 +109,20 @@
   <entity entity-name="ContactMech" package="moqui.party">
     <field name="contactMechId" type="id" is-pk="true"></field>
     <field name="contactMechEnumId" type="id"></field>
-    <relationship type="one" related="moqui.basic.Enumeration">
+    <relationship type="one" related="moqui.party.TelecomNumber"></relationship>
+    <relationship type="one" related="moqui.party.PostalAddress"></relationship>
+    <relationship type="one" related="moqui.basic.Enumeration" short-alias="contactType">
     <key-map field-name="contactMechEnumId" />
     </relationship>
     <seed-data>
      <moqui.basic.EnumerationType description="Contact Mech Type" enumTypeId="contactType" />
       <moqui.basic.Enumeration description="EMAIL_ADDRESS" enumId="EMAIL_ADDRESS" enumTypeId="contactType" />
+      <moqui.basic.Enumeration description="TELECOM_ADDRESS" enumId="TELECOM_ADDRESS" enumTypeId="contactType" />
       <moqui.basic.Enumeration description="POSTAL_ADDRESS" enumId="POSTAL_ADDRESS" enumTypeId="contactType" />
-      <moqui.basic.Enumeration description="TELECOM_ADDRESS" enumId="POSTAL_ADDRESS" enumTypeId="contactType" />
-
     </seed-data>
+     <master>
+    <detail relationship="contactType" use-master="default"></detail>
+    </master>
   </entity>
 
 
