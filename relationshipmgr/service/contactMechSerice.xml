@@ -11,6 +11,37 @@
 </out-parameters>
 </service>
 
-<!--  -->
+<!-- read contact mech  -->
+<service verb="get" noun="ContactMech">
+<in-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<parameter name="value"></parameter>
+</out-parameters>
+<actions>
+<entity-find-one entity-name="moqui.party.ContactMech" value-field="value">
+</entity-find-one>
+</actions>
+</service>
+
+<!-- update the contact mech -->
+
+<service verb="update" noun="ContactMech" type="entity-auto">
+<in-parameters>
+<auto-parameters include="all"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<auto-parameters include="all"></auto-parameters>
+</out-parameters>
+</service>
+
+<!-- delete the contactmech -->
+
+<service verb="delete" noun="ContactMech" type="entity-auto" >
+<in-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</in-parameters>
+</service>
 
 </services>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+<!-- create service for the telecom address -->
+
+<service verb="create" noun="TelecomAddress">
+<in-parameters>
+<auto-parameters include="all">
+</auto-parameters>
+</in-parameters>
+<out-parameters >
+<auto-parameters include="pk"></auto-parameters>
+</out-parameters>
+</service>
+
+<!-- create service for the postalAddress craeate -->
+
+<service verb="create" noun="PostalAddress">
+<in-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</out-parameters>
+</service>
+
+<!-- service -->
+
+</services>

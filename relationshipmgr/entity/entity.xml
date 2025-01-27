@@ -7,7 +7,7 @@
 
   <entity entity-name="Party" package="moqui.party">
     <field name="partyId" type="id" is-pk="true"></field>
-    <field name="partyTypeId" type="id" ></field>
+    <field name="partyTypeId" type="id"  ></field>
 
     <relationship type="one-nofk" related="moqui.party.Person" short-alias="person"></relationship>
     <relationship type="one-nofk" related="moqui.party.Organization" short-alias="organization"></relationship>
@@ -26,6 +26,7 @@
     <detail relationship="person"></detail>
     <detail relationship="organization"></detail>
     </master>
+    
   </entity>
 
 
@@ -109,8 +110,8 @@
   <entity entity-name="ContactMech" package="moqui.party">
     <field name="contactMechId" type="id" is-pk="true"></field>
     <field name="contactMechEnumId" type="id"></field>
-    <relationship type="one" related="moqui.party.TelecomNumber"></relationship>
-    <relationship type="one" related="moqui.party.PostalAddress"></relationship>
+    <relationship type="one-nofk" related="moqui.party.TelecomNumber"></relationship>
+    <relationship type="one-nofk" related="moqui.party.PostalAddress"></relationship>
     <relationship type="one" related="moqui.basic.Enumeration" short-alias="contactType">
     <key-map field-name="contactMechEnumId" />
     </relationship>

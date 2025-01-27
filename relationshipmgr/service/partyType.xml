@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+<!-- create person service -->
+<service verb="create" noun="Person" type="inline">
+<in-parameters>
+<auto-parameters include="all"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<auto-parameters include="all"/>
+</out-parameters>
+<actions>
+<entity-find-one entity-name="moqui.party.Party" value-field="data">
+</entity-find-one>
+
+<if condition="data.partyTypeId != 'organization'">
+<entity-set value-field="data" include="all" />
+<entity-make-value entity-name="moqui.party.Person" value-field="values" />
+<entity-set value-field="values" include="all" />
+<entity-create value-field="values" />
+<else>
+<message>Its a person</message>
+</else>
+</if>
+</actions>
+</service>
+
+<!-- create organization for the service -->
+<service verb="create" noun="Organization" type="inline">
+<in-parameters>
+<auto-parameters include="all"></auto-parameters>
+</in-parameters>
+<out-parameters>
+<auto-parameters include="pk"></auto-parameters>
+</out-parameters>
+<actions>
+<entity-find-one entity-name="moqui.party.Party" value-field="data">
+</entity-find-one>
+
+<if condition="data.partyTypeId != 'person'">
+<entity-make-value entity-name="moqui.party.Organization" value-field="values" />
+<entity-set value-field="values" include="all" />
+<entity-create value-field="values" />
+<else>
+<message>Its a person</message>
+</else>
+</if>
+</actions>
+</service>
+</services>

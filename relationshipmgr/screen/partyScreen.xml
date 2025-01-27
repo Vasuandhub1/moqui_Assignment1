@@ -5,7 +5,7 @@
         <!-- transition -->
          <transition name="createTutorial">
         <service-call name="partyService.create#Party"/>
-        <default-response url="."/>
+        <default-response url="../relationshipmgr/updateparty"/>
         </transition> 
 
         <!-- transition for updateparty -->
@@ -20,12 +20,27 @@
         <service-call name="partyService.delete#Party"></service-call>
         <default-response url="."></default-response>
         </transition>
+        
+        <!--  create transition for the personn -->
 
+        <transition name="createPerson">
+        <service-call name="partyServices.create#Person"/>
+        <default-response url="."></default-response>
+        </transition>
+
+        <!-- create contactMech -->
         <transition name="createContactMech">
-        <service-call name="partyService.create#ContactMech"></service-call>
+        <service-call name="partyType.create#ContactMech"></service-call>
        
         <default-response url="." />
         </transition>
+
+        <!-- create organization -->
+        <transition name="createOrganization">
+        <service-call name="partyType.create#Organization"></service-call>
+        <default-response url="." ></default-response>
+        </transition>
+
 
  <!-- wigets -->
 
@@ -48,11 +63,11 @@
        <form-single name="UpdateParty" transition="updateparty">
        <auto-fields-entity entity-name="moqui.party.Party" field-type="edit" >
        </auto-fields-entity>
-       <field name="submitbutton">
-       <default-field title="Update"><submit/></default-field>
-       </field>
+       <field name="submitbutton" >
+       <default-field  title="Update"><submit /></default-field>
+       </field >
        </form-single>
-       </container-dialog>
+       </container-dialog >
 
        <!-- screen for the delete the party  -->
 
@@ -75,6 +90,30 @@
        <auto-fields-entity entity-name="moqui.party.ContactMech" field-type="edit"></auto-fields-entity>
        <field name="submitBUtton">
         <default-field title="Create"><submit/></default-field>
+       </field>
+       </form-single>
+       </container-dialog>
+
+
+       <!-- container create person -->
+       
+       <container-dialog id="createPerson" button-text="Create Person">
+       <form-single name="CreatePerson" transition="createPerson">
+       <auto-fields-entity entity-name="moqui.party.Person" field-type="edit"></auto-fields-entity>
+       <field name="return">
+       <default-field title="submit"><submit/></default-field>
+       </field>
+       </form-single>
+       </container-dialog>
+
+
+       <!-- container create person -->
+
+       <container-dialog id="createOrganization" button-text="Create Organization">
+       <form-single name="CreatePerson" transition="createOrganization">
+       <auto-fields-entity entity-name="moqui.party.Organization" field-type="edit"></auto-fields-entity>
+       <field name="return">
+       <default-field title="submit"><submit/></default-field>
        </field>
        </form-single>
        </container-dialog>
